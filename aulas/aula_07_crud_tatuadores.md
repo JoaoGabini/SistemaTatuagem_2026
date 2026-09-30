@@ -678,6 +678,7 @@ Agora temos 3 páginas soltas (`clientes.html`, `senioridade.html`, `tatuadores.
 
 ---
 
+
 ## Dois problemas, duas soluções
 
 | Problema | Onde resolvemos | Como resolvemos |
