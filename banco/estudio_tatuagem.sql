@@ -151,6 +151,8 @@ CREATE TABLE `tatuador_estilo` (
   `dataestilo` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+
+
 --
 -- Despejando dados para a tabela `tatuador_estilo`
 --
@@ -160,6 +162,7 @@ INSERT INTO `tatuador_estilo` (`idtatuador`, `idestilo`, `dataestilo`) VALUES
 (1, 3, '2021-05-10'),
 (2, 2, '2022-06-15'),
 (3, 4, '2024-01-10');
+
 
 --
 -- Índices para tabelas despejadas
@@ -265,6 +268,16 @@ ALTER TABLE `tatuador_estilo`
   ADD CONSTRAINT `tatuador_estilo_ibfk_1` FOREIGN KEY (`idtatuador`) REFERENCES `tatuador` (`idtatuador`),
   ADD CONSTRAINT `tatuador_estilo_ibfk_2` FOREIGN KEY (`idestilo`) REFERENCES `estilo` (`idestilo`);
 COMMIT;
+
+CREATE TABLE usuario (
+    idusuario INT AUTO_INCREMENT PRIMARY KEY,
+    nome      VARCHAR(100) NOT NULL,
+    email     VARCHAR(150) NOT NULL UNIQUE,
+    senha     VARCHAR(255) NOT NULL,                            -- aqui vai o hash, nunca a senha em si
+    tipo      ENUM('admin', 'funcionario', 'cliente') NOT NULL DEFAULT 'funcionario',
+    idcliente INT DEFAULT NULL,                                  -- só preenchido se tipo = 'cliente'
+    FOREIGN KEY (idcliente) REFERENCES cliente(idcliente)
+);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
