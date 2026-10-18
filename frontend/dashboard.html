@@ -6,7 +6,88 @@
   <title>Dashboard — Estúdio de Tatuagem</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+<style>
+  /* ======================================================
+ESTILO DA PÁGINA: DASHBOARD / PAINEL
+====================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap');
+
+:root {
+--bg-dark: #0f0f12;
+--bg-card: #18181c;
+--border-color: #2e2e36;
+--yellow-primary: #ffcc00;
+--yellow-hover: #e6b800;
+--yellow-glow: rgba(255, 204, 0, 0.25);
+--text-main: #f0f0f3;
+--text-muted: #a0a0ab;
+}
+
+body {
+background-color: var(--bg-dark) !important;
+color: var(--text-main) !important;
+font-family: 'Plus Jakarta Sans', sans-serif;
+min-height: 100vh;
+}
+
+.navbar {
+background-color: var(--bg-card) !important;
+border-bottom: 1px solid var(--border-color);
+border-radius: 12px;
+padding: 0.8rem 1.5rem !important;
+}
+
+.navbar-brand {
+font-family: 'Cinzel', serif;
+color: var(--yellow-primary) !important;
+font-weight: 700;
+}
+
+h1 {
+font-family: 'Cinzel', serif;
+color: var(--yellow-primary);
+font-weight: 700;
+border-bottom: 2px solid var(--border-color);
+padding-bottom: 10px;
+}
+
+/* Dashboard Cards/Buttons Grid */
+.btn-primary.py-3 {
+background-color: var(--bg-card) !important;
+border: 2px solid var(--yellow-primary) !important;
+color: var(--yellow-primary) !important;
+font-size: 1.2rem;
+font-weight: 700;
+letter-spacing: 1px;
+border-radius: 12px;
+transition: all 0.3s ease !important;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary.py-3:hover {
+background-color: var(--yellow-primary) !important;
+color: #000000 !important;
+transform: translateY(-5px);
+box-shadow: 0 8px 25px var(--yellow-glow) !important;
+}
+
+.btn-secondary.py-3 {
+background-color: var(--bg-card) !important;
+border: 1px solid var(--border-color) !important;
+color: var(--text-muted) !important;
+font-size: 1.1rem;
+font-weight: 600;
+border-radius: 12px;
+transition: all 0.3s ease !important;
+}
+
+.btn-secondary.py-3:hover {
+border-color: var(--yellow-primary) !important;
+color: var(--yellow-primary) !important;
+transform: translateY(-3px);
+}
+</style>
 <body>
 
   <nav class="navbar navbar-dark bg-dark mb-4">
