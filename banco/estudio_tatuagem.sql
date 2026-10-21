@@ -279,6 +279,9 @@ CREATE TABLE usuario (
     FOREIGN KEY (idcliente) REFERENCES cliente(idcliente)
 );
 
+INSERT INTO usuario (nome, email, senha, tipo)
+VALUES ('Administrador', 'admin@estudio.com', '$2b$12$DeXsH.o6Q9emgqSOOnUeZeMWpS7g5Or.mKS/cilKJRNMIKwGtyty6', 'admin');
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
