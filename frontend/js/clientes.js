@@ -12,14 +12,20 @@ const formCliente = document.getElementById('form-cliente')
 const botaoSubmit = document.getElementById('btn-submit-cliente')
 
 async function listarClientes() {
-  const resposta = await fetchAutenticado(`${API}/clientes`)
-  const clientes = await resposta.json()
-
   const corpo = document.getElementById('corpo-tabela')
-  corpo.innerHTML = ''
 
-  clientes.forEach(c => {
-    corpo.innerHTML += `
+  try {
+    const resposta = await fetchAutenticado(`${API}/clientes`)
+    const resultado = await resposta.json()
+
+    if (!resposta.ok) {
+      throw new Error(resultado.detail || resultado.erro || 'Não foi possível carregar os clientes.')
+    }
+
+    corpo.innerHTML = ''
+
+    resultado.forEach(c => {
+      corpo.innerHTML += `
       <tr>
         <td>${c.idcliente}</td>
         <td>${c.nome}</td>
@@ -32,7 +38,11 @@ async function listarClientes() {
           <button class="btn btn-sm btn-danger" onclick="deletarCliente(${c.idcliente})">Excluir</button>
         </td>
       </tr>`
-  })
+    })
+  } catch (erro) {
+    corpo.innerHTML = `<tr><td colspan="7" class="text-danger">${erro.message}</td></tr>`
+    console.error('Erro ao listar clientes:', erro)
+  }
 }
 
 listarClientes()

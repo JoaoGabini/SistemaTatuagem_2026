@@ -21,7 +21,7 @@ async function fetchAutenticado(url, opcoes = {}) {
     'Authorization': `Bearer ${token}`
   }
 
-  const resposta = await fetchAutenticado(url, opcoes)
+  const resposta = await fetch(url, opcoes)
 
   if (resposta.status === 401) {
     // o token não é mais válido (expirou, ou foi removido) — manda de volta pro login

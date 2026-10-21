@@ -141,7 +141,6 @@ border-color: var(--border-color) !important;
 </nav>
   <h1>Clientes</h1>
 
-  <!-- Formulário para cadastrar novo cliente -->
   <form id="form-cliente" class="row g-2 mt-2 mb-4">
     <div class="col-md-3">
       <input type="text" id="nome" class="form-control" placeholder="Nome" required>
@@ -163,7 +162,6 @@ border-color: var(--border-color) !important;
     </div>
   </form>
 
-  <!-- Tabela onde os clientes vão aparecer -->
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -177,11 +175,10 @@ border-color: var(--border-color) !important;
       </tr>
     </thead>
     <tbody id="corpo-tabela">
-      <!-- os clientes vão aparecer aqui -->
     </tbody>
   </table>
 
-  <!-- Importa o arquivo JavaScript separado -->
+  <script src="js/auth.js"></script>
   <script src="js/clientes.js"></script>
 
 </body>
