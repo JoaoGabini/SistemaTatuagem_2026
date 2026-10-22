@@ -17,9 +17,9 @@ async function fetchAutenticado(url, opcoes = {}) {
   const token = localStorage.getItem('token')
 
   opcoes.headers = {
-    ...opcoes.headers,           // mantém qualquer header que a chamada já tivesse (tipo Content-Type)
-    'Authorization': `Bearer ${token}`
+    ...opcoes.headers           // mantém qualquer header que a chamada já tivesse (tipo Content-Type)
   }
+  if (token) opcoes.headers.Authorization = `Bearer ${token}`
 
   const resposta = await fetch(url, opcoes)
 

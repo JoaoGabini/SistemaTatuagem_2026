@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09/09/2026 às 19:56
+-- Tempo de geração: 22/10/2026 às 02:22
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -71,7 +71,8 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`idcliente`, `nome`, `cpf`, `telefone`, `datacadastro`, `cidade`, `uf`) VALUES
 (1, 'Ana Silva', '44444444444', '11988880001', '2024-01-15', 'São Paulo', 'SP'),
-(2, 'Bruno Costa', '55555555555', '31988880002', '2024-03-22', 'Belo Horizonte', 'MG');
+(2, 'Bruno Costa', '55555555555', '31988880002', '2024-03-22', 'Belo Horizonte', 'MG'),
+(3, 'joao4', '1231231231', '1321312312', '0000-00-00', 'suzano', 'sp');
 
 -- --------------------------------------------------------
 
@@ -151,8 +152,6 @@ CREATE TABLE `tatuador_estilo` (
   `dataestilo` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
-
 --
 -- Despejando dados para a tabela `tatuador_estilo`
 --
@@ -163,6 +162,30 @@ INSERT INTO `tatuador_estilo` (`idtatuador`, `idestilo`, `dataestilo`) VALUES
 (2, 2, '2022-06-15'),
 (3, 4, '2024-01-10');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `idusuario` int(11) NOT NULL,
+  `nome` varchar(100) NOT NULL,
+  `email` varchar(150) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `tipo` enum('admin','funcionario','cliente') NOT NULL DEFAULT 'funcionario',
+  `idcliente` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `usuario`
+--
+
+INSERT INTO `usuario` (`idusuario`, `nome`, `email`, `senha`, `tipo`, `idcliente`) VALUES
+(1, 'joao', 'joao@email.com', '$2b$12$c5V3HWil8aPMM0szvQS4rOXezQyO6POPrdCM4jve2.4uRF3GgrbKK', 'funcionario', NULL),
+(4, 'Administrador', 'admin@estudio.com', '$2b$12$X5BueT7T/lJGCiQ1oCTV6.whrirVhVXInFS/.RJt2MgEAGi/H1YY6', 'admin', NULL),
+(5, 'joao1', 'joao1@email.com', '$2b$12$lYBLAel2NAnm3aO65qKqEOP/PQ4oXQTypCJADLmNpMw2jbtNGfjI6', 'funcionario', NULL),
+(6, 'joao', 'joao10@email.com', '$2b$12$qJo8tXNWmQ0ntgIh3AneN.gla/XJBgboLyW78LZZayLFUd0A1KPgS', 'funcionario', NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -211,6 +234,14 @@ ALTER TABLE `tatuador_estilo`
   ADD KEY `idestilo` (`idestilo`);
 
 --
+-- Índices de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idusuario`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD KEY `idcliente` (`idcliente`);
+
+--
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
@@ -224,7 +255,7 @@ ALTER TABLE `agendamento`
 -- AUTO_INCREMENT de tabela `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `estilo`
@@ -243,6 +274,12 @@ ALTER TABLE `senioridade`
 --
 ALTER TABLE `tatuador`
   MODIFY `idtatuador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idusuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restrições para tabelas despejadas
@@ -267,20 +304,13 @@ ALTER TABLE `tatuador`
 ALTER TABLE `tatuador_estilo`
   ADD CONSTRAINT `tatuador_estilo_ibfk_1` FOREIGN KEY (`idtatuador`) REFERENCES `tatuador` (`idtatuador`),
   ADD CONSTRAINT `tatuador_estilo_ibfk_2` FOREIGN KEY (`idestilo`) REFERENCES `estilo` (`idestilo`);
+
+--
+-- Restrições para tabelas `usuario`
+--
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`idcliente`) REFERENCES `cliente` (`idcliente`);
 COMMIT;
-
-CREATE TABLE usuario (
-    idusuario INT AUTO_INCREMENT PRIMARY KEY,
-    nome      VARCHAR(100) NOT NULL,
-    email     VARCHAR(150) NOT NULL UNIQUE,
-    senha     VARCHAR(255) NOT NULL,                            -- aqui vai o hash, nunca a senha em si
-    tipo      ENUM('admin', 'funcionario', 'cliente') NOT NULL DEFAULT 'funcionario',
-    idcliente INT DEFAULT NULL,                                  -- só preenchido se tipo = 'cliente'
-    FOREIGN KEY (idcliente) REFERENCES cliente(idcliente)
-);
-
-INSERT INTO usuario (nome, email, senha, tipo)
-VALUES ('Administrador', 'admin@estudio.com', '$2b$12$DeXsH.o6Q9emgqSOOnUeZeMWpS7g5Or.mKS/cilKJRNMIKwGtyty6', 'admin');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -8,11 +8,14 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from datetime import datetime, timedelta, timezone
 from database import conectar
+from dotenv import load_dotenv
 import bcrypt
 import jwt
 import os
 
 router = APIRouter()
+
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 
 SECRET_KEY = os.getenv("SECRET_KEY")   # a chave que assina os tokens, vinda do .env
 ALGORITMO = "HS256"                    # o "tipo de selo" usado pra assinar

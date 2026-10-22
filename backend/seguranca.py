@@ -6,8 +6,11 @@
 
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from dotenv import load_dotenv
 import jwt
 import os
+
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITMO = "HS256"

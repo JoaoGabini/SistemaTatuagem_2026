@@ -57,7 +57,7 @@ A partir de agora, `POST /usuarios` (cadastro) deixa de ser público — só um 
 Como não existe mais um jeito de se cadastrar pela API sem já ser admin, vamos gerar o hash da senha manualmente, do mesmo jeito que a rota de cadastro faz por baixo dos panos (Aula 12), só que rodando direto no terminal:
 
 ```powershell
-p  
+python -c "import bcrypt; print(bcrypt.hashpw(b'suasenha123', bcrypt.gensalt()).decode())"
 ```
 Veja o hash aparecendo no terminal — é esse texto que você vai copiar pra criar o usuário no phpMyAdmin:
 

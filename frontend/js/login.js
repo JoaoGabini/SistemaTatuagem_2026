@@ -1,5 +1,4 @@
 const API = 'http://127.0.0.1:8000'
-protegerPagina()
 const formLogin = document.getElementById('form-login')
 
 formLogin.addEventListener('submit', async (e) => {

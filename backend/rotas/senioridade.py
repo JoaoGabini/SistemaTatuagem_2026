@@ -57,7 +57,7 @@ def atualizar_senioridade(id: int, senioridade: Senioridade):
     return {"mensagem": "Senioridade atualizada com sucesso"}
 
 # DELETE /senioridade/{id} — deleta uma senioridade
-@router.delete("/senioridade/{id}")
+@router.delete("/{id}")
 def deletar_senioridade(id: int):
     conn = conectar()
     cursor = conn.cursor()
